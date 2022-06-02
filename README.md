@@ -28,4 +28,5 @@ resultados que se muestran?, ¿Por qué crees que la cobertura del código no es
 
 >Por que todas las pruebas deben pasar. Para ello refactorizamos para corregir el error anterior. Par ello debemos hacer que no sea posible la creacion de vuelos, con un tipo que no existe.  
 
-4. 
+3.Pregunta 3 (3 puntos) La refactorización y los cambios de la API se propagan a las pruebas.
+Reescribe el archivo Airport Test de la carpeta Fase 3. 
