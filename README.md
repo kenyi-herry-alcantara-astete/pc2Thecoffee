@@ -5,7 +5,7 @@ resultados que se muestran?, ¿Por qué crees que la cobertura del código no es
 
 >Se muestra error en el test testBusinessFlightRegularPassenger, se configuro un tipo de vuelo no valido. "Businnes". La prueba pasa cuando se cambian por "Negocios". 
 
-''''Java
+'''Java
 
         @BeforeEach
         void setUp() {
@@ -25,4 +25,7 @@ resultados que se muestran?, ¿Por qué crees que la cobertura del código no es
 '''
 
 2. Pregunta 2 (1 punto) ¿ Por qué John tiene la necesidad de refactorizar la aplicación?.
-3. 
+
+>Por que todas las pruebas deben pasar. Para ello refactorizamos para corregir el error anterior. 
+
+4. 
