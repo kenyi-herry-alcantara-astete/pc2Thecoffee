@@ -3,6 +3,7 @@
 1. Pregunta 1 (3 puntos) Si ejecutamos las pruebas con cobertura desde IntelliJ IDEA, ¿cuales son los
 resultados que se muestran?, ¿Por qué crees que la cobertura del código no es del 100%? .
 
+>No hay covertura de codigo del 100% , por que no pasa todas la pruebas.
 >Se muestra error en el test testBusinessFlightRegularPassenger, se configuro un tipo de vuelo no valido. "Businnes". La prueba pasa cuando se cambian por "Negocios". 
 
 '''Java
