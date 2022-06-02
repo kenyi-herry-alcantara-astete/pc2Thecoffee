@@ -26,6 +26,6 @@ resultados que se muestran?, ¿Por qué crees que la cobertura del código no es
 
 2. Pregunta 2 (1 punto) ¿ Por qué John tiene la necesidad de refactorizar la aplicación?.
 
->Por que todas las pruebas deben pasar. Para ello refactorizamos para corregir el error anterior. 
+>Por que todas las pruebas deben pasar. Para ello refactorizamos para corregir el error anterior. Par ello debemos hacer que no sea posible la creacion de vuelos, con un tipo que no existe.  
 
 4. 
