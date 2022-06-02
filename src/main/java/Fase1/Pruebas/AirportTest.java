@@ -1,5 +1,7 @@
 package Fase1.Pruebas;
 
+import Fase1.Produccion.Flight;
+import Fase1.Produccion.Passenger;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -54,7 +56,7 @@ public class AirportTest {
 
         @BeforeEach
         void setUp() {
-            businessFlight = new Flight("2", "Business");
+            businessFlight = new Flight("2", "Negocios");
         }
 
         @Test
