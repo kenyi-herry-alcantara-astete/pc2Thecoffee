@@ -31,6 +31,6 @@ resultados que se muestran?, ¿Por qué crees que la cobertura del código no es
 
 3. Pregunta 3 (3 puntos) La refactorización y los cambios de la API se propagan a las pruebas.
 Reescribe el archivo Airport Test de la carpeta Fase 3. 
-
->Hay un cobertura de codigo del 100%.
+>Luego de rescribir y agregarle test.
+>Hay un cobertura de codigo del 100% (Pasa todas las pruebas).
 >La refactorizacion si ayudo a mejorar el codigo. Dado que implementa polimorfismo en lugar de solo condicionales.
