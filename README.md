@@ -1,13 +1,13 @@
 # pc2Thecoffee
 
-|Integrantes                   |
-|------------------------------|
-|Alcantara Astete Kenyi Herry  |
-|                              |
-|                              |
-|                              |
+|Integrantes                            |
+|---------------------------------------|
+|Alcantara Astete Kenyi Herry  20180343C|
+|                                       |
+|                                       |
+|                                       |
 
-
+---
 
 
 0. Ejecuta el programa de la carpeta "anterior" y presenta los resultados y explica que sucede.
