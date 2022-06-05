@@ -374,3 +374,19 @@ El resultado de correr el test es (Rojo):
 
 7. Agrega la lógica comercial solo para pasajeros VIP en la clase
 PremiumFlight. Guarda ese archivo en la carpeta Producción de la Fase 5.
+
+Agregando la logica comercial de la clase premiumFlight:
+
+``` Java
+
+
+
+```
+
+Se observa que las pruebas pasaron satisfactoriamente: 
+
+``` java
+
+
+
+```
