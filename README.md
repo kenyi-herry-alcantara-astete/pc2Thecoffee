@@ -3,10 +3,14 @@
 Ejecuta el programa de la carpeta "anterior" y presenta los resultados y explica que sucede.
 
 Se observa que nos da como resultado en consola:
-'''
+'''Console
+
 Lista de pasajeros de vuelos de negocios:
+
 Cesar
+
 Lista de pasajeros de vuelos economicos:
+
 Jessica
 '''
 Nota: La aplicación a este nivel se construyó sin seguir el metodo TDD. Solo siguiendo pruebas manuales y aun no se ha implementado pruebas actomáticas.  
