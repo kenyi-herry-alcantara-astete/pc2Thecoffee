@@ -10,7 +10,7 @@ public class PremiumFlight extends Flight {
   }
 
     @Override
-    public boolean addPassenger(Fase4.Produccion.Passenger passenger) {
+    public boolean addPassenger(Passenger passenger) {
         return false;
     }
 
