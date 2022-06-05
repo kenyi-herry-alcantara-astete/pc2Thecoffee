@@ -95,14 +95,14 @@ Codigo cambiado:
 
         }
 ```
-<<<<<<< HEAD
+
 
 Cobertura del 100%:
 
 ![Screen shot de la prueba de cobertura](./src/resource/coverage100.png)
 
-=======
->>>>>>> origin/main
+
+
 
 2. Pregunta 2 (1 punto) ¿ Por qué John tiene la necesidad de refactorizar la aplicación?.
 
