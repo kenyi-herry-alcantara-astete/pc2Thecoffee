@@ -4,7 +4,7 @@ import Fase4.Produccion.Passenger;
 
 public class PremiumFlight extends Flight {
 
-  // Diseño inicial de la clase  PremiumFlight. Pregunta 5
+  // Diseño Incial
   public PremiumFlight(String id) {
       super(id);
   }
@@ -18,7 +18,6 @@ public class PremiumFlight extends Flight {
     public boolean removePassenger(Passenger passenger) {
         return false;
     }
-
 
 }
 
