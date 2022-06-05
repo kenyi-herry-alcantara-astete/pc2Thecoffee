@@ -3,10 +3,61 @@
 1. Pregunta 1 (3 puntos) Si ejecutamos las pruebas con cobertura desde IntelliJ IDEA, ¿cuales son los
 resultados que se muestran?, ¿Por qué crees que la cobertura del código no es del 100%? .
 
->No hay covertura de codigo del 100% , por que no pasa todas la pruebas.
->Se muestra error en el test testBusinessFlightRegularPassenger, se configuro un tipo de vuelo no valido. "Businnes". La prueba pasa cuando se cambian por "Negocios". 
+Ejecutando la prueba de cobertura: 
 
-'''Java
+![Screen shot de la prueba de cobertura](./src/resource/coveragePrueba.png)
+>No hay una cobertura del 100%. Si bien ejecutaron 
+> las 3 clases y los 8 métodos, Solo hay una cobertura del 79% de líneas.
+> Esto debido a que no pasaron todas líneas. 
+
+
+
+>Creemos que no pasan todas la pruebas, porque seguramente
+> una prueba no está siendo satisfacida, por
+> que a simple vista vemos que el tipo de vuelo
+> que tiene Jessica no corresponde a los tipos de vuelos creados. 
+
+Se observa que se creó solo los tipos "Economico" y "Negocios"
+```Java
+
+public class Airport {
+
+    public static void main(String[] args) {
+        Flight economyFlight = new Flight("1", "Economico");
+        Flight businessFlight = new Flight("2", "Negocios");
+        //...
+    }
+}
+
+```
+Y en una de las pruebas se está haciendo con un tipo "Business"
+
+
+``` Java
+
+        @BeforeEach
+        void setUp() {
+            businessFlight = new Flight("2", "Business");
+        }
+
+        @Test
+        public void testBusinessFlightRegularPassenger() {
+            Passenger jessica = new Passenger("Jessica", false);
+
+            assertEquals(false, businessFlight.addPassenger(jessica));
+            assertEquals(0, businessFlight.getPassengersList().size());
+            assertEquals(false, businessFlight.removePassenger(jessica));
+            assertEquals(0, businessFlight.getPassengersList().size());
+
+        }
+```
+
+> Efectivamente, esa era la razon. Ya que si cambiamos "Business" por
+> "Negocios" la prueba de cobertura es del 100%
+
+Codigo cambiado:
+
+``` Java
 
         @BeforeEach
         void setUp() {
@@ -23,7 +74,12 @@ resultados que se muestran?, ¿Por qué crees que la cobertura del código no es
             assertEquals(0, businessFlight.getPassengersList().size());
 
         }
-'''
+```
+
+Cobertura del 100%:
+
+![Screen shot de la prueba de cobertura](./src/resource/coverage100.png)
+
 
 2. Pregunta 2 (1 punto) ¿ Por qué John tiene la necesidad de refactorizar la aplicación?.
 
