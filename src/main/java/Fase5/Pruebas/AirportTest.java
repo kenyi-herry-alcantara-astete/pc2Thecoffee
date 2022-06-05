@@ -220,6 +220,8 @@ public class AirportTest {
                 );
             }
 
+
+
             @DisplayName("Entonces no puedes agregarlo a un vuelo premium mas de una vez")
             @RepeatedTest(5)
             public void testPremiumFlightVipPassengerAddedOnlyOnce(RepetitionInfo repetitionInfo) {
@@ -232,6 +234,7 @@ public class AirportTest {
                         () -> assertTrue(new ArrayList<>(premiumFlight.getPassengersSet()).get(0).getName().equals("Cesar"))
                 );
             }
+
         }
     }
 
