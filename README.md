@@ -21,7 +21,7 @@ Jessica
 
 Ejecutando la prueba de cobertura:
 
-<<<<<<< HEAD
+
 ![Screen shot de la prueba de cobertura](./src/resource/coveragePrueba.png)
 >No hay una cobertura del 100%. Si bien ejecutaron
 > las 3 clases y los 8 métodos, Solo hay una cobertura del 79% de líneas.
@@ -75,9 +75,6 @@ Y en una de las pruebas se está haciendo con un tipo "Business"
 Codigo cambiado:
 
 ``` Java
-=======
-```Java
->>>>>>> origin/main
 
         @BeforeEach
         void setUp() {
@@ -106,10 +103,66 @@ Cobertura del 100%:
 
 2. Pregunta 2 (1 punto) ¿ Por qué John tiene la necesidad de refactorizar la aplicación?.
 
->Por que todas las pruebas deben pasar. Para ello refactorizamos para corregir el error anterior. Par ello debemos hacer que no sea posible la creacion de vuelos, con un tipo que no existe.
+>Porque si se le presenta la necesidad de agregar un tipo mas de vulelo, con
+> la clase dada que tien dos metodos que continen declaraciones de "comparaciones",
+> se tendria que agregar otras "comparaciones" adicionales para cada metodo.
+> Que en este caso seria en 2 metodos (2 esfuerzos).
+
+``` Java
+
+public class Flight {
+
+//...
+    private String flightType;
+//...
+    public boolean addPassenger(Passenger passenger) {
+        switch (flightType) {
+            case "Economico":
+                return passengers.add(passenger);
+            case "Negocios":
+                if (passenger.isVip()) {
+                    return passengers.add(passenger);
+                }
+                return false;
+            default:
+                throw new RuntimeException("Tipo desconocido: " + flightType);
+        }
+
+    }
+
+    public boolean removePassenger(Passenger passenger) {
+        switch (flightType) {
+            case "Economico":
+                if (!passenger.isVip()) {
+                    return passengers.remove(passenger);
+                }
+                return false;
+            case "Negocios":
+                return false;
+            default:
+                throw new RuntimeException("Tipo desconocido: " + flightType);
+        }
+    }
+
+}
+
+```
+
+>Pero, si se aplica polimorfismo. Solo se tendria que crear una clase mas.
+> Entonces el trabajo se reduce de 2 esfuerzos  a 1 esfuerzo.
+
+>De esta manera el sistemas seria mas escalable a futuras adiciones 
+> de mas tipos de vuelos. 
+
+>Tambien la eficienia (Performance) del software se estaria aumentado. Ya que ejecutaria **menos** sentencias "comparaciones".  
 
 3. Pregunta 3 (3 puntos) La refactorización y los cambios de la API se propagan a las pruebas.
    Reescribe el archivo Airport Test de la carpeta Fase 3.
 >Luego de rescribir y agregarle test.
+
+
+¿Cuál es la cobertura del código ?
 >Hay un cobertura de codigo del 100% (Pasa todas las pruebas).
+
+¿ La refactorización de la aplicación TDD ayudó tanto a mejorar la calidad del código?.
 >La refactorizacion si ayudo a mejorar el codigo. Dado que implementa polimorfismo en lugar de solo condicionales.
