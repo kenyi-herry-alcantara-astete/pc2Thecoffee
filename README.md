@@ -3,7 +3,7 @@
 Ejecuta el programa de la carpeta "anterior" y presenta los resultados y explica que sucede.
 
 Se observa que nos da como resultado en consola:
-'''Console
+```Console
 
 Lista de pasajeros de vuelos de negocios:
 
@@ -12,8 +12,8 @@ Cesar
 Lista de pasajeros de vuelos economicos:
 
 Jessica
-'''
-Nota: La aplicación a este nivel se construyó sin seguir el metodo TDD. Solo siguiendo pruebas manuales y aun no se ha implementado pruebas actomáticas.  
+```
+>Nota: La aplicación a este nivel se construyó sin seguir el metodo TDD. Solo siguiendo pruebas manuales y aun no se ha implementado pruebas actomáticas.  
 
 
 1. Pregunta 1 (3 puntos) Si ejecutamos las pruebas con cobertura desde IntelliJ IDEA, ¿cuales son los
@@ -22,7 +22,7 @@ resultados que se muestran?, ¿Por qué crees que la cobertura del código no es
 >No hay covertura de codigo del 100% , por que no pasa todas la pruebas.
 >Se muestra error en el test testBusinessFlightRegularPassenger, se configuro un tipo de vuelo no valido. "Businnes". La prueba pasa cuando se cambian por "Negocios". 
 
-'''Java
+```Java
 
         @BeforeEach
         void setUp() {
@@ -39,7 +39,7 @@ resultados que se muestran?, ¿Por qué crees que la cobertura del código no es
             assertEquals(0, businessFlight.getPassengersList().size());
 
         }
-'''
+```
 
 2. Pregunta 2 (1 punto) ¿ Por qué John tiene la necesidad de refactorizar la aplicación?.
 
