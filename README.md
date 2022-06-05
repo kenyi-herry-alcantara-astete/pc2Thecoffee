@@ -162,7 +162,117 @@ public class Flight {
 
 
 ¿Cuál es la cobertura del código ?
->Hay un cobertura de codigo del 100% (Pasa todas las pruebas).
+
+
+
+Cobertura del 100%:
+
+![Screen shot de la prueba de cobertura](./src/resource/coverage103.png)
+
+
+
 
 ¿ La refactorización de la aplicación TDD ayudó tanto a mejorar la calidad del código?.
->La refactorizacion si ayudo a mejorar el codigo. Dado que implementa polimorfismo en lugar de solo condicionales.
+>La refactorizacion si ayudo a mejorar el codigo. Dado que implementa polimorfismo en lugar de solo sentencias de "comparacion".
+>
+
+
+Pregunta 4 (2 puntos): ¿En qué consiste está regla relacionada a la refactorización?. Evita utilizar y
+copiar respuestas de internet. Explica como se relaciona al problema dado en la evaluación.
+
+> La regla consiste en que si se tiene dos porciones de codigo duplicado,
+> y sele quiere añadir otra mas.
+> La regla dice que ya no es posible.
+> Entonces, se debe refactorizar el codigo, de tal manera que
+> que agrupe el codigo en un procedimiento que se comporte de acuerdo 
+> al un parametro enviado.
+
+> En nuestro caso se observa, que tenemos dos tests similares.
+> El cual solo cambia en el tipo de clase que se somete a prueba. 
+> Pero si agregamos una nueva clase de otro tipo de vuelo, por ejemplo premium.
+> entonces requeririamos un test mas y tendriamos tres tests similares ahora,
+> el cual estaria violando "la regla de tres".
+>Por ello debemos buscar una nueva forma de agruparlos y dependiendo de que clase se quiere 
+> probar, este debe realizar el test a la clase en cuestion.   
+
+Se observa 2 tests similares: 
+``` Java
+
+public class AirportTest {
+
+    @DisplayName("Dado que hay un vuelo economico")
+    @Nested
+    class EconomyFlightTest {
+
+        private Flight economyFlight;
+
+        @BeforeEach
+        void setUp() {
+            economyFlight = new EconomyFlight("1");
+        }
+
+        @Test
+        public void testEconomyFlightRegularPassenger() {
+            Passenger jessica = new Passenger("Jessica", false);
+
+            assertEquals("1", economyFlight.getId());
+            assertEquals(true, economyFlight.addPassenger(jessica));
+            assertEquals(1, economyFlight.getPassengersList().size());
+            assertEquals("Jessica", economyFlight.getPassengersList().get(0).getName());
+
+            assertEquals(true, economyFlight.removePassenger(jessica));
+            assertEquals(0, economyFlight.getPassengersList().size());
+        }
+
+        @Test
+        public void testEconomyFlightVipPassenger() {
+            Passenger cesar = new Passenger("Cesar", true);
+
+            assertEquals("1", economyFlight.getId());
+            assertEquals(true, economyFlight.addPassenger(cesar));
+            assertEquals(1, economyFlight.getPassengersList().size());
+            assertEquals("Cesar", economyFlight.getPassengersList().get(0).getName());
+
+            assertEquals(false, economyFlight.removePassenger(cesar));
+            assertEquals(1, economyFlight.getPassengersList().size());
+        }
+
+    }
+
+    @DisplayName("Dado que hay un vuelo negocios")
+    @Nested
+    class BusinessFlightTest {
+        private Flight businessFlight;
+
+        @BeforeEach
+        void setUp() {
+            businessFlight = new BusinessFlight("2");
+        }
+
+        @Test
+        public void testBusinessFlightRegularPassenger() {
+            Passenger jessica = new Passenger("Jessica", false);
+
+            assertEquals(false, businessFlight.addPassenger(jessica));
+            assertEquals(0, businessFlight.getPassengersList().size());
+            assertEquals(false, businessFlight.removePassenger(jessica));
+            assertEquals(0, businessFlight.getPassengersList().size());
+
+        }
+
+        @Test
+        public void testBusinessFlightVipPassenger() {
+            Passenger cesar = new Passenger("Cesar", true);
+
+            assertEquals(true, businessFlight.addPassenger(cesar));
+            assertEquals(1, businessFlight.getPassengersList().size());
+            assertEquals(false, businessFlight.removePassenger(cesar));
+            assertEquals(1, businessFlight.getPassengersList().size());
+
+        }
+
+    }
+
+}
+
+```
