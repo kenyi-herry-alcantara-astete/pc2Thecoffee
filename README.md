@@ -16,7 +16,7 @@ Jessica
 >Nota: La aplicación a este nivel se construyó sin seguir el metodo TDD. Solo siguiendo pruebas manuales y aun no se ha implementado pruebas automáticas.
 
 
-1. Pregunta 1 (3 puntos) Si ejecutamos las pruebas con cobertura desde IntelliJ IDEA, ¿cuales son los
+1. Si ejecutamos las pruebas con cobertura desde IntelliJ IDEA, ¿cuales son los
    resultados que se muestran?, ¿Por qué crees que la cobertura del código no es del 100%? .
 
 Ejecutando la prueba de cobertura:
@@ -101,7 +101,7 @@ Cobertura del 100%:
 
 
 
-2. Pregunta 2 (1 punto) ¿ Por qué John tiene la necesidad de refactorizar la aplicación?.
+2.  ¿ Por qué John tiene la necesidad de refactorizar la aplicación?.
 
 >Porque si se le presenta la necesidad de agregar un tipo mas de vulelo, con
 > la clase dada que tien dos metodos que continen declaraciones de "comparaciones",
@@ -156,7 +156,7 @@ public class Flight {
 
 >Tambien la eficienia (Performance) del software se estaria aumentado. Ya que ejecutaria **menos** sentencias "comparaciones".  
 
-3. Pregunta 3 (3 puntos) La refactorización y los cambios de la API se propagan a las pruebas.
+3.  La refactorización y los cambios de la API se propagan a las pruebas.
    Reescribe el archivo Airport Test de la carpeta Fase 3.
 >Luego de rescribir y agregarle test.
 
@@ -177,7 +177,7 @@ Cobertura del 100%:
 >
 
 
-Pregunta 4 (2 puntos): ¿En qué consiste está regla relacionada a la refactorización?. Evita utilizar y
+4. ¿En qué consiste está regla relacionada a la refactorización?. Evita utilizar y
 copiar respuestas de internet. Explica como se relaciona al problema dado en la evaluación.
 
 > La regla consiste en que si se tiene dos porciones de codigo duplicado,
@@ -187,7 +187,7 @@ copiar respuestas de internet. Explica como se relaciona al problema dado en la 
 > que agrupe el codigo en un procedimiento que se comporte de acuerdo 
 > al un parametro enviado.
 
-> En nuestro caso se observa, que tenemos dos tests similares.
+> En nuestro caso se observa, que tenemos dos tests similares (EconomyFlightTest y BusinessFlightTest).
 > El cual solo cambia en el tipo de clase que se somete a prueba. 
 > Pero si agregamos una nueva clase de otro tipo de vuelo, por ejemplo premium.
 > entonces requeririamos un test mas y tendriamos tres tests similares ahora,
@@ -270,9 +270,107 @@ public class AirportTest {
             assertEquals(1, businessFlight.getPassengersList().size());
 
         }
+        
 
     }
 
 }
 
 ```
+
+5.  Escribe el diseño inicial de la clase llamada PremiumFlight y agrega a la
+Fase 4 en la carpeta producción.
+
+
+>Dado que se implementara con el metodo TDD. Para le diseño inical solo
+> retornamos "false" en cada metodo de PremiumFlight.
+
+``` Java
+
+public class PremiumFlight extends Flight {
+
+  // Diseño inicial de la clase  PremiumFlight. Pregunta 5
+  public PremiumFlight(String id) {
+      super(id);
+  }
+
+    @Override
+    public boolean addPassenger(Fase4.Produccion.Passenger passenger) {
+        return false;
+    }
+
+    @Override
+    public boolean removePassenger(Passenger passenger) {
+        return false;
+    }
+
+
+}
+
+```
+
+
+6. Ayuda a John e implementa las pruebas de acuerdo con la lógica comercial
+de vuelos premium de las figuras anteriores. Adjunta tu código en la parte que se indica en el código
+de la Fase 4. Después de escribir las pruebas, John las ejecuta.
+
+>A continuacion se muestra el test para la clase PremiumFilght
+>que pide como expectativas verdadero el poder agregar y eliminar pasajeros VIP. 
+>Pide expectativas falso si se quiere agregar un pasajero regular. 
+
+``` Java
+    @DisplayName("Dado que hay un vuelo premium")
+    @Nested
+    class PremiumFlightTest {
+        private Flight premiumFlight;
+        private Passenger jessica;
+        private Passenger cesar;
+
+        @BeforeEach
+        void setUp() {
+            premiumFlight = new PremiumFlight("3");
+            jessica = new Passenger("Jessica", false);
+            cesar = new Passenger("Cesar", true);
+        }
+
+        @Nested
+        @DisplayName("Cuando tenemos un pasajero regular")
+        class RegularPassenger {
+
+            @Test
+            @DisplayName("Entonces no puede agregarle a un vuelo premium")
+            public void testPremiumFlightRegularPassenger() {
+                assertAll("Verifica todas las condiciones para un pasajero regular y un vuelo premium",
+                        () -> assertEquals(false, premiumFlight.addPassenger(jessica)),//Comprobamos que no se puede agregar a un pasajero regular al vuelo premium
+                        () -> assertEquals(0, premiumFlight.getPassengersList().size()),// comprobamos que no hay pasajeros en al avión
+                        () -> assertEquals(false, premiumFlight.removePassenger(jessica)),// comprobamos que no se puede remover a jessica porque no esta en el avión
+                        () -> assertEquals(0, premiumFlight.getPassengersList().size())// comprobamos que no hay pasajeros en al avión
+                );
+            }
+        }
+
+        @Nested
+        @DisplayName("Cuando tenemos un pasajero VIP")
+        class VipPassenger {
+
+            @Test
+            @DisplayName("Luego puedes agregarlo y eliminarlo de un vuelo de premium")
+            public void testPremiumFlightVipPassenger() {
+                assertAll("Verifica todas las condiciones para un pasajero VIP y un vuelo de premium",
+                        () -> assertEquals(true, premiumFlight.addPassenger(cesar)),//Comprobamos que si se puede agregar a un pasajero Vip a un vuelo Premium
+                        () -> assertEquals(1, premiumFlight.getPassengersList().size()),//Comprobamos que el pasajero se encuentra dentro del avión
+                        () -> assertEquals(true, premiumFlight.removePassenger(cesar)),//Comprobamos que si es posible retirar a un pasajero Vip
+                        () -> assertEquals(0, premiumFlight.getPassengersList().size())//Comprobamos el retiro del pasajero Vip
+                );
+            }
+        }
+    }
+```
+
+El resultado de correr el test es (Rojo):
+
+![Screen shot de la prueba de cobertura](./src/resource/pruebaTestPremium.png)
+
+
+7. Agrega la lógica comercial solo para pasajeros VIP en la clase
+PremiumFlight. Guarda ese archivo en la carpeta Producción de la Fase 5.
