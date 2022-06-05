@@ -444,7 +444,9 @@ public class AirportTest {
         class RegularPassenger {
 
             //...
-
+            
+            //Unicidad para pasajero regular en un vuelo de Económico. 
+            
             @DisplayName("Entonces no puedes agregarlo a un vuelo economico mas de una vez")
             @RepeatedTest(5)
             public void testEconomyFlightRegularPassengerAddedOnlyOnce(RepetitionInfo repetitionInfo) {
@@ -464,6 +466,8 @@ public class AirportTest {
         class VipPassenger {
             
             //...
+            
+            //Unicidad para pasajero VIP en un vuelo de Económico.
             
             @DisplayName("Entonces no puedes agregarlo a un vuelo economico mas de una vez")
             @RepeatedTest(5)
@@ -500,6 +504,8 @@ public class AirportTest {
 
            //...
 
+            // Unicidad para un pasajero Regular en un vuelo de negocios.
+
             @DisplayName("Entonces no puedes agregarlo a un vuelo de negocio")
             @RepeatedTest(5)
             public void testBusinessFlightRegularPassengerAddedOnlyOnce(RepetitionInfo repetitionInfo) {
@@ -519,6 +525,8 @@ public class AirportTest {
 
             //...
 
+            // Unicidad para un pasajero VIP en un vuelo de negocios.
+
             @DisplayName("Entonces no puedes agregarlo a un vuelo de negocios mas de una vez.")
             @RepeatedTest(5)
             public void testBusinessFlightVipPassengerAddedOnlyOnce(RepetitionInfo repetitionInfo) {
@@ -534,7 +542,7 @@ public class AirportTest {
         }
     }
 
-    // Recuerda que debes completar esto del ejercicio anterior 6
+   
     @DisplayName("Dado que hay un vuelo premium")
     @Nested
     class PremiumFlightTest {
@@ -555,7 +563,8 @@ public class AirportTest {
 
             //...
             
-            // Completar el código. Pregunta 8
+          // Unicidad para un pasajero Regular en un vuelo de Premium.  
+         
             @DisplayName("Entonces no puedes agregarlo a un vuelo de negocios")
             @RepeatedTest(5)
             public void testBusinessFlightRegularPassengerAddedOnlyOnce(RepetitionInfo repetitionInfo) {
@@ -573,6 +582,8 @@ public class AirportTest {
         class VipPassenger {
 
            //...
+           
+           // Unicidad para un pasajero VIP en un vuelo de Premium.
 
             @DisplayName("Entonces no puedes agregarlo a un vuelo premium mas de una vez")
             @RepeatedTest(5)
