@@ -1,11 +1,11 @@
 # pc2Thecoffee
 
-|Integrantes                            |
-|---------------------------------------|
-|Alcantara Astete Kenyi Herry  20180343C|
-|                                       |
-|                                       |
-|                                       |
+| Integrantes                              |
+|------------------------------------------|
+| Alcantara Astete Kenyi Herry  20180343C  |
+| Caycho Villalobos José Gabriel 20190584C |
+|                                          |
+|                                          |
 
 ---
 
@@ -27,8 +27,8 @@ Jessica
 
 ---
 
-1. Si ejecutamos las pruebas con cobertura desde IntelliJ IDEA, ¿cuales son los
-   resultados que se muestran?, ¿Por qué crees que la cobertura del código no es del 100%? .
+1. Si ejecutamos las pruebas con cobertura desde IntelliJ IDEA, ¿cuáles son los
+   resultados que se muestran?, ¿Por qué crees que la cobertura del código no es del 100%?.
 
 Ejecutando la prueba de cobertura:
 
@@ -83,7 +83,7 @@ Y en una de las pruebas se está haciendo con un tipo "Business"
 > Efectivamente, esa era la razon. Ya que si cambiamos "Business" por
 > "Negocios" la prueba de cobertura es del 100%
 
-Codigo cambiado:
+Código cambiado:
 
 ``` Java
 
@@ -112,7 +112,8 @@ Cobertura del 100%:
 
 ---
 
-2.  ¿ Por qué John tiene la necesidad de refactorizar la aplicación?.
+
+2.  ¿Por qué John tiene la necesidad de refactorizar la aplicación?.
 
 >Porque si se le presenta la necesidad de agregar un tipo mas de vulelo, con
 > la clase dada que tien dos metodos que continen declaraciones de "comparaciones",
@@ -394,7 +395,7 @@ El resultado de correr el test es (Rojo):
 7. Agrega la lógica comercial solo para pasajeros VIP en la clase
 PremiumFlight. Guarda ese archivo en la carpeta Producción de la Fase 5.
 
-Agregando la logica comercial de la clase premiumFlight:
+Agregando la lógica comercial de la clase premiumFlight:
 
 ``` Java
 
@@ -440,7 +441,7 @@ puede agregar una vez a un vuelo. La ejecución de las pruebas ahora es exitosa,
 código del 100 %. John ha implementado esta nueva característica en estilo TDD.
 
 
-Implementacion del Tests que prueba la unicidad de un pasajero:
+Implementación del Tests que prueba la unicidad de un pasajero:
 ```Java
 
 public class AirportTest {
