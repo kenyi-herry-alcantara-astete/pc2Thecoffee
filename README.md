@@ -4,7 +4,7 @@
 |------------------------------------------|
 | Alcantara Astete Kenyi Herry  20180343C  |
 | Caycho Villalobos José Gabriel 20190584C |
-|                                          |
+| Rojas Sanchez Alexander Miller 20190574H |
 |                                          |
 
 ---
