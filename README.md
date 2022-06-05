@@ -299,7 +299,7 @@ public class AirportTest {
 Fase 4 en la carpeta producción.
 
 
->Dado que se implementara con el metodo TDD. Para le diseño inical solo
+>Dado que se implementará con el desarrollo basado en pruebas (TDD). Para le diseño inicial solo
 > retornamos "false" en cada metodo de PremiumFlight.
 
 ``` Java
@@ -332,8 +332,8 @@ public class PremiumFlight extends Flight {
 de vuelos premium de las figuras anteriores. Adjunta tu código en la parte que se indica en el código
 de la Fase 4. Después de escribir las pruebas, John las ejecuta.
 
->A continuacion se muestra el test para la clase PremiumFilght
->que pide como expectativas verdadero el poder agregar y eliminar pasajeros VIP. 
+>A continuacion se muestra el test para la clase PremiumFilght.
+>Pide como expectativas verdadero el poder agregar y eliminar pasajeros VIP. 
 >Pide expectativas falso si se quiere agregar un pasajero regular. 
 
 ``` Java
