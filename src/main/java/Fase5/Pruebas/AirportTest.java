@@ -163,7 +163,7 @@ public class AirportTest {
         }
     }
 
-    // Recuerda que debes completar esto del ejercicio anterior 6
+ 
     @DisplayName("Dado que hay un vuelo premium")
     @Nested
     class PremiumFlightTest {
