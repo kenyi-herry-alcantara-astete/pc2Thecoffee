@@ -4,7 +4,7 @@
 |------------------------------------------|
 | Alcantara Astete Kenyi Herry  20180343C  |
 | Caycho Villalobos José Gabriel 20190584C |
-| Rojas Sanchez Alexander Miller 20190574H |
+|                                          |
 |                                          |
 
 ---
@@ -35,37 +35,38 @@ Ejecutando la prueba de cobertura:
 
 ![Screen shot de la prueba de cobertura](./src/resource/coveragePrueba.png)
 >No hay una cobertura del 100%. Si bien ejecutaron
-> las 3 clases y los 8 métodos, Solo hay una cobertura del 79% de líneas.
-> Esto debido a que no pasaron todas líneas.
+> las 3 clases y los 8 métodos, solo hay una cobertura del 79% de líneas.
+> Esto debido a que no pasaron todas líneas de alguna prueba.
 
 
 
 >Creemos que no pasan todas la pruebas, porque seguramente
-> una prueba no está siendo satisfacida, por
-> que a simple vista vemos que el tipo de vuelo
+> una prueba no está siendo satisfacida.
+> A simple vista vemos que el tipo de vuelo
 > que tiene Jessica no corresponde a los tipos de vuelos creados.
 
-Se observa que se creó solo los tipos "Economico" y "Negocios"
+Se observa en la clase Airport que solo se creó dos tipos: "Economico" y "Negocios".
 ```Java
 
 public class Airport {
 
     public static void main(String[] args) {
-        Flight economyFlight = new Flight("1", "Economico");
-        Flight businessFlight = new Flight("2", "Negocios");
+        Flight economyFlight = new Flight("1", "Economico");  //Tipo Económico
+        Flight businessFlight = new Flight("2", "Negocios");  //Tipo Negocios
         //...
     }
 }
 
 ```
-Y en una de las pruebas se está haciendo con un tipo "Business"
+Y en una de las pruebas se está haciendo con un tipo "Business", el cual es diferente a las dos creadas en la
+clase Airport.
 
 
 ``` Java
 
         @BeforeEach
         void setUp() {
-            businessFlight = new Flight("2", "Business");
+            businessFlight = new Flight("2", "Business");  //Tipo Business != (Tipo Economico y Tipo Negocios)
         }
 
         @Test
@@ -80,16 +81,16 @@ Y en una de las pruebas se está haciendo con un tipo "Business"
         }
 ```
 
-> Efectivamente, esa era la razon. Ya que si cambiamos "Business" por
-> "Negocios" la prueba de cobertura es del 100%
+> Efectivamente, esa era la razón. Ya que si cambiamos "Business" por
+> "Negocios" la prueba de cobertura pasa el 100%.
 
-Código cambiado:
+Código cambiado: De Business a Negocios:
 
 ``` Java
 
         @BeforeEach
         void setUp() {
-            businessFlight = new Flight("2", "Negocios");
+            businessFlight = new Flight("2", "Negocios"); //Tipo Negocios
         }
 
         @Test
@@ -115,23 +116,34 @@ Cobertura del 100%:
 
 2.  ¿Por qué John tiene la necesidad de refactorizar la aplicación?.
 
->Porque si se le presenta la necesidad de agregar un tipo mas de vulelo, con
-> la clase dada que tien dos metodos que continen declaraciones de "comparaciones",
-> se tendria que agregar otras "comparaciones" adicionales para cada metodo.
+>Porque si se le presenta la necesidad de agregar un tipo más de vuelo. Con
+> la clase Flight dada que tiene dos metodos que continen cada una declaraciones de "comparaciones".
+> Se tendria que agregar otras "comparaciones" adicionales para **cada** metodo.
 > Que en este caso seria en 2 metodos (2 esfuerzos).
+
+>Pero, si se aplica polimorfismo. Solo se tendría que crear **una** clase más para agregar un nuevo tipo de vuelo.
+> Entonces el trabajo se reduce de "2 esfuerzos"  a "1 esfuerzo".
+
+
+Código de la clase Flight que esta impleméntada con sentencias de "comparación". No utiliza polimorfismo. 
 
 ``` Java
 
 public class Flight {
 
-//...
+//...(Here is some hidden code)
+
     private String flightType;
-//...
-    public boolean addPassenger(Passenger passenger) {
-        switch (flightType) {
-            case "Economico":
+
+//...(Here is some hidden code)
+
+
+//Método 1
+public boolean addPassenger(Passenger passenger) {
+        switch (flightType) {                          
+            case "Economico":                           //Sentencia de comparación
                 return passengers.add(passenger);
-            case "Negocios":
+            case "Negocios":                             //Sentencia de comparación
                 if (passenger.isVip()) {
                     return passengers.add(passenger);
                 }
@@ -142,14 +154,16 @@ public class Flight {
 
     }
 
+
+//Método 2
     public boolean removePassenger(Passenger passenger) {
         switch (flightType) {
-            case "Economico":
+            case "Economico":                           //Sentencia de comparación
                 if (!passenger.isVip()) {
                     return passengers.remove(passenger);
                 }
                 return false;
-            case "Negocios":
+            case "Negocios":                               //Sentencia de comparación
                 return false;
             default:
                 throw new RuntimeException("Tipo desconocido: " + flightType);
@@ -160,23 +174,22 @@ public class Flight {
 
 ```
 
->Pero, si se aplica polimorfismo. Solo se tendria que crear una clase mas.
-> Entonces el trabajo se reduce de 2 esfuerzos  a 1 esfuerzo.
 
->De esta manera el sistemas seria mas escalable a futuras adiciones 
+
+>Si aplicamos polimorfismo, prevemos que el sistemas sería más escalable a futuras adiciones 
 > de mas tipos de vuelos. 
 
->Tambien la eficienia (Performance) del software se estaria aumentado. Ya que ejecutaria **menos** sentencias "comparaciones".  
+>Tambien la eficienia (Performance) del software se estaria incrementado. Ya que ejecutaría **menos** sentencias de "comparaciones".  
 
 ---
 
 3.  La refactorización y los cambios de la API se propagan a las pruebas.
    Reescribe el archivo Airport Test de la carpeta Fase 3.
->Luego de rescribir y agregarle test.
+   
+>Luego de reescribir:
 
 
 ¿Cuál es la cobertura del código ?
-
 
 
 Cobertura del 100%:
@@ -187,28 +200,30 @@ Cobertura del 100%:
 
 
 ¿ La refactorización de la aplicación TDD ayudó tanto a mejorar la calidad del código?.
->La refactorizacion si ayudo a mejorar el codigo. Dado que implementa polimorfismo en lugar de solo sentencias de "comparacion".
->
+
+>La refactorizacion **si** ayudó a mejorar el código. Dado que implementa polimorfismo en lugar de un código **no escalable** con sentencias de "comparación".
+
+
 
 ---
 
 4. ¿En qué consiste está regla relacionada a la refactorización?. Evita utilizar y
 copiar respuestas de internet. Explica como se relaciona al problema dado en la evaluación.
 
-> La regla consiste en que si se tiene dos porciones de codigo duplicado,
-> y sele quiere añadir otra mas.
-> La regla dice que ya no es posible.
+> La **regla de tres** consiste en que si se tiene dos porciones de codigo similares,
+> y sele quiere añadir otra mas, que tambien es similar. 
+> La regla dice que ya no es eficiente agregar una tercera.
 > Entonces, se debe refactorizar el codigo, de tal manera que
-> que agrupe el codigo en un procedimiento que se comporte de acuerdo 
-> al un parametro enviado.
+> que agrupe el codigo en un solo procedimiento. El cual debe ser equivalente en funcionalidad para cada comportamiento,
+> pero mas eficiente en la ejecución. 
 
 > En nuestro caso se observa, que tenemos dos tests similares (EconomyFlightTest y BusinessFlightTest).
 > El cual solo cambia en el tipo de clase que se somete a prueba. 
 > Pero si agregamos una nueva clase de otro tipo de vuelo, por ejemplo premium.
-> entonces requeririamos un test mas y tendriamos tres tests similares ahora,
-> el cual estaria violando "la regla de tres".
->Por ello debemos buscar una nueva forma de agruparlos y dependiendo de que clase se quiere 
-> probar, este debe realizar el test a la clase en cuestion.   
+> Entonces se requerirá un test mas y tendriamos tres tests similares ahora.
+> El cual estaria violando "la regla de tres".
+> Por ello debemos buscar una nueva forma de agruparlos (En nuestro caso, con la anotación @Nested). 
+> Dependiendo de que clase se quiere probar, este debe realizar el test a la clase en cuestion, de manera eficiente.    
 
 Se observa 2 tests similares: 
 ``` Java
@@ -299,26 +314,28 @@ public class AirportTest {
 Fase 4 en la carpeta producción.
 
 
->Dado que se implementará con el desarrollo basado en pruebas (TDD). Para le diseño inicial solo
-> retornamos "false" en cada metodo de PremiumFlight.
+>Dado que se implementará con el desarrollo basado en pruebas (TDD). Debemos realizar un diseño inicial, que solo
+> retorna "false" en cada metodo de PremiumFlight.
+
+Diseño inicial: 
 
 ``` Java
 
 public class PremiumFlight extends Flight {
 
-  // Diseño inicial de la clase  PremiumFlight. Pregunta 5
+  // Diseño inicial de la clase  PremiumFlight
   public PremiumFlight(String id) {
       super(id);
   }
 
     @Override
     public boolean addPassenger(Fase4.Produccion.Passenger passenger) {
-        return false;
+        return false;  //Retornamos false
     }
 
     @Override
     public boolean removePassenger(Passenger passenger) {
-        return false;
+        return false; //Retornamos false
     }
 
 
@@ -332,10 +349,12 @@ public class PremiumFlight extends Flight {
 de vuelos premium de las figuras anteriores. Adjunta tu código en la parte que se indica en el código
 de la Fase 4. Después de escribir las pruebas, John las ejecuta.
 
->A continuacion se muestra el test para la clase PremiumFilght.
+>A continuacion se muestra la implementación del test para la clase PremiumFilght.
 >Pide como expectativas verdadero el poder agregar y eliminar pasajeros VIP. 
->Pide expectativas falso si se quiere agregar un pasajero regular. 
+>Pide expectativa falso si se quiere agregar un pasajero regular. 
 
+
+Código de la implementación del test para la clase PremiumFilght:
 ``` Java
     @DisplayName("Dado que hay un vuelo premium")
     @Nested
@@ -385,7 +404,8 @@ de la Fase 4. Después de escribir las pruebas, John las ejecuta.
     }
 ```
 
-El resultado de correr el test es (Rojo):
+El resultado de correr el test es **Rojo**, el cual es normal (Uno de los primeros pasos) cuando se utiliza un 
+desarrollo basado en pruebas (TDD). 
 
 ![Screen shot de la prueba de cobertura](./src/resource/pruebaTestPremium.png)
 
@@ -395,6 +415,11 @@ El resultado de correr el test es (Rojo):
 7. Agrega la lógica comercial solo para pasajeros VIP en la clase
 PremiumFlight. Guarda ese archivo en la carpeta Producción de la Fase 5.
 
+>La lógica comercial dice que solo los pasajero VIP pueden ser agregados 
+>o eliminados del tipo de vuelo Premium.
+>Un pasajero regular no puede ser agregado a un vuelo Premium. Por ende tampoco 
+>pueden ser eliminado (No puedes eliminar algo que no existe). 
+
 Agregando la lógica comercial de la clase premiumFlight:
 
 ``` Java
@@ -402,27 +427,30 @@ Agregando la lógica comercial de la clase premiumFlight:
 public class PremiumFlight extends Flight {
 
    //Logica comercial
+   
+   
     public PremiumFlight(String id) {
         super(id);
     }
 
     @Override
     public boolean addPassenger(Passenger passenger) {
-        // si pasajero es vip se agrega pasajero al avión
+        // si pasajero es vip, se agrega pasajero al avión.
         if (passenger.isVip()) {
             return passengers.add(passenger);
         }
-        // si pasajero no es vip no se agrega pasajero al avión
+        // si pasajero no es vip, no se agrega pasajero al avión.
         return false;
     }
 
     @Override
     public boolean removePassenger(Passenger passenger) {
-        // si pasajero es vip se elimina pasajero del avión
+        // si pasajero es vip, se elimina pasajero del avión.
         if (passenger.isVip()) {
             return passengers.remove(passenger);
         }
-        // si pasajero no es vip no se puede remover pasajero del avión
+        // si pasajero no es vip, no se puede remover pasajero del avión.
+        // Dado que no existe.(Un regular no se le pude agregar a un vuleo Premium) 
         return false;
     }
 }
@@ -430,7 +458,7 @@ public class PremiumFlight extends Flight {
 
 ```
 
-Se observa que las pruebas pasaron satisfactoriamente: 
+Se observa que las pruebas pasaron satisfactoriamente. Resultado **Verde**: 
 
 ![Screen shot de la prueba de cobertura](./src/resource/prueba7.png)
 
@@ -465,7 +493,7 @@ public class AirportTest {
         @DisplayName("Cuando tenemos un pasajero regular")
         class RegularPassenger {
 
-            //...
+            //...(Here is some hidden code)
             
             //Unicidad para pasajero regular en un vuelo de Económico. 
             
@@ -487,7 +515,7 @@ public class AirportTest {
         @DisplayName("Cuando tenemos un pasajero VIP")
         class VipPassenger {
             
-            //...
+            //...(Here is some hidden code)
             
             //Unicidad para pasajero VIP en un vuelo de Económico.
             
@@ -524,7 +552,7 @@ public class AirportTest {
         @DisplayName("Cuando tenemos un pasajero regular")
         class RegularPassenger {
 
-           //...
+           //...(Here is some hidden code)
 
             // Unicidad para un pasajero Regular en un vuelo de negocios.
 
@@ -545,7 +573,7 @@ public class AirportTest {
         @DisplayName("Cuando tenemos un pasajero VIP")
         class VipPassenger {
 
-            //...
+            //...(Here is some hidden code)
 
             // Unicidad para un pasajero VIP en un vuelo de negocios.
 
@@ -583,7 +611,7 @@ public class AirportTest {
         @DisplayName("Cuando tenemos un pasajero regular")
         class RegularPassenger {
 
-            //...
+            //...(Here is some hidden code)
             
           // Unicidad para un pasajero Regular en un vuelo de Premium.  
          
@@ -603,7 +631,7 @@ public class AirportTest {
         @DisplayName("Cuando tenemos un pasajero VIP")
         class VipPassenger {
 
-           //...
+           //...(Here is some hidden code)
            
            // Unicidad para un pasajero VIP en un vuelo de Premium.
 
