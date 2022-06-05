@@ -115,7 +115,7 @@ public class AirportTest {
         }
     }
 
-    @DisplayName("Dado que hay un vuelo de negocios")
+    @DisplayName("Dado que hay un vuelo premium")
     @Nested
     class PremiumFlightTest {
         private Flight premiumFlight;
@@ -134,13 +134,13 @@ public class AirportTest {
         class RegularPassenger {
 
             @Test
-            @DisplayName("Entonces no puede agregarlo o eliminarlo de un vuelo premium")
-            public void testBusinessFlightRegularPassenger() {
-                assertAll("Verifica todas las condiciones para un pasajero regular y un vuelo de negocios",
-                        () -> assertEquals(false, premiumFlight.addPassenger(jessica)),
-                        () -> assertEquals(0, premiumFlight.getPassengersList().size()),
-                        () -> assertEquals(false, premiumFlight.removePassenger(jessica)),
-                        () -> assertEquals(0, premiumFlight.getPassengersList().size())
+            @DisplayName("Entonces no puede agregarle a un vuelo premium")
+            public void testPremiumFlightRegularPassenger() {
+                assertAll("Verifica todas las condiciones para un pasajero regular y un vuelo premium",
+                        () -> assertEquals(false, premiumFlight.addPassenger(jessica)),//Comprobamos que no se puede agregar a un pasajero regular al vuelo premium
+                        () -> assertEquals(0, premiumFlight.getPassengersList().size()),// comprobamos que no hay pasajeros en al avión
+                        () -> assertEquals(false, premiumFlight.removePassenger(jessica)),// comprobamos que no se puede remover a jessica porque no esta en el avión
+                        () -> assertEquals(0, premiumFlight.getPassengersList().size())// comprobamos que no hay pasajeros en al avión
                 );
             }
         }
@@ -150,17 +150,17 @@ public class AirportTest {
         class VipPassenger {
 
             @Test
-            @DisplayName("Luego puedes agregarlo pero no puedes eliminarlo de un vuelo de premium")
-            public void testBusinessFlightVipPassenger() {
-                assertAll("Verifica todas las condiciones para un pasajero VIP y un vuelo de negocios",
-                        () -> assertEquals(true, premiumFlight.addPassenger(cesar)),
-                        () -> assertEquals(1, premiumFlight.getPassengersList().size()),
-                        () -> assertEquals(false, premiumFlight.removePassenger(cesar)),
-                        () -> assertEquals(1, premiumFlight.getPassengersList().size())
+            @DisplayName("Luego puedes agregarlo y eliminarlo de un vuelo de premium")
+            public void testPremiumFlightVipPassenger() {
+                assertAll("Verifica todas las condiciones para un pasajero VIP y un vuelo de premium",
+                        () -> assertEquals(true, premiumFlight.addPassenger(cesar)),//Comprobamos que si se puede agregar a un pasajero Vip a un vuelo Premium
+                        () -> assertEquals(1, premiumFlight.getPassengersList().size()),//Comprobamos que el pasajero se encuentra dentro del avión
+                        () -> assertEquals(true, premiumFlight.removePassenger(cesar)),//Comprobamos que si es posible retirar a un pasajero Vip
+                        () -> assertEquals(0, premiumFlight.getPassengersList().size())//Comprobamos el retiro del pasajero Vip
                 );
             }
         }
     }
 }
-// Completa la prueba para PremiumFlight de acuerdo a la logica comercial dada. Pregunta 6
+
 
