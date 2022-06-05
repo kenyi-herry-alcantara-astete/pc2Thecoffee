@@ -1,5 +1,15 @@
 # pc2Thecoffee
 
+|Integrantes                   |
+|------------------------------|
+|Alcantara Astete Kenyi Herry  |
+|                              |
+|                              |
+|                              |
+
+
+
+
 0. Ejecuta el programa de la carpeta "anterior" y presenta los resultados y explica que sucede.
 
 Se observa que nos da como resultado en consola:
