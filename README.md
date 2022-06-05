@@ -25,6 +25,7 @@ Jessica
 ```
 >Nota: La aplicación a este nivel se construyó sin seguir el metodo TDD. Solo siguiendo pruebas manuales y aun no se ha implementado pruebas automáticas.
 
+---
 
 1. Si ejecutamos las pruebas con cobertura desde IntelliJ IDEA, ¿cuales son los
    resultados que se muestran?, ¿Por qué crees que la cobertura del código no es del 100%? .
@@ -109,7 +110,7 @@ Cobertura del 100%:
 ![Screen shot de la prueba de cobertura](./src/resource/coverage100.png)
 
 
-
+---
 
 2.  ¿ Por qué John tiene la necesidad de refactorizar la aplicación?.
 
@@ -166,6 +167,8 @@ public class Flight {
 
 >Tambien la eficienia (Performance) del software se estaria aumentado. Ya que ejecutaria **menos** sentencias "comparaciones".  
 
+---
+
 3.  La refactorización y los cambios de la API se propagan a las pruebas.
    Reescribe el archivo Airport Test de la carpeta Fase 3.
 >Luego de rescribir y agregarle test.
@@ -186,6 +189,7 @@ Cobertura del 100%:
 >La refactorizacion si ayudo a mejorar el codigo. Dado que implementa polimorfismo en lugar de solo sentencias de "comparacion".
 >
 
+---
 
 4. ¿En qué consiste está regla relacionada a la refactorización?. Evita utilizar y
 copiar respuestas de internet. Explica como se relaciona al problema dado en la evaluación.
@@ -288,6 +292,8 @@ public class AirportTest {
 
 ```
 
+---
+
 5.  Escribe el diseño inicial de la clase llamada PremiumFlight y agrega a la
 Fase 4 en la carpeta producción.
 
@@ -319,6 +325,7 @@ public class PremiumFlight extends Flight {
 
 ```
 
+---
 
 6. Ayuda a John e implementa las pruebas de acuerdo con la lógica comercial
 de vuelos premium de las figuras anteriores. Adjunta tu código en la parte que se indica en el código
@@ -382,6 +389,8 @@ El resultado de correr el test es (Rojo):
 ![Screen shot de la prueba de cobertura](./src/resource/pruebaTestPremium.png)
 
 
+---
+
 7. Agrega la lógica comercial solo para pasajeros VIP en la clase
 PremiumFlight. Guarda ese archivo en la carpeta Producción de la Fase 5.
 
@@ -423,6 +432,8 @@ public class PremiumFlight extends Flight {
 Se observa que las pruebas pasaron satisfactoriamente: 
 
 ![Screen shot de la prueba de cobertura](./src/resource/prueba7.png)
+
+---
 
 8. Ayuda a John a crear una nueva prueba para verificar que un pasajero solo se
 puede agregar una vez a un vuelo. La ejecución de las pruebas ahora es exitosa, con una cobertura de
