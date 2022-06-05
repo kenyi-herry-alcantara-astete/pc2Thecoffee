@@ -1,5 +1,17 @@
 # pc2Thecoffee
 
+Ejecuta el programa de la carpeta "anterior" y presenta los resultados y explica que sucede.
+
+Se observa que nos da como resultado en consola:
+'''
+Lista de pasajeros de vuelos de negocios:
+Cesar
+Lista de pasajeros de vuelos economicos:
+Jessica
+'''
+Nota: La aplicación a este nivel se construyó sin seguir el metodo TDD. Solo siguiendo pruebas manuales y aun no se ha implementado pruebas actomáticas.  
+
+
 1. Pregunta 1 (3 puntos) Si ejecutamos las pruebas con cobertura desde IntelliJ IDEA, ¿cuales son los
 resultados que se muestran?, ¿Por qué crees que la cobertura del código no es del 100%? .
 
